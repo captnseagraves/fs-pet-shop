@@ -155,34 +155,34 @@ describe('pets restfulExpressServer', () => {
         });
     });
 
-    it('should update pets.json when given an incomplete pet object', (done) => {
-      request(app)
-        .patch('/pets/1')
-        .set('Authorization', 'Basic YWRtaW46bWVvd21peA==')
-        .send({
-          age: 3
-        })
-        .expect('Content-type', /json/)
-        .expect(200, {
-          age: 3,
-          kind: 'duck',
-          name: 'Bob'
-        }, (err, _res) => {
-          if (err) {
-            return done(err);
-          }
+      it('should update pets.json when given an incomplete pet object', (done) => {
+        request(app)
+          .patch('/pets/1')
+          .set('Authorization', 'Basic YWRtaW46bWVvd21peA==')
+          .send({
+            age: 3
+          })
+          .expect('Content-type', /json/)
+          .expect(200, {
+            age: 3,
+            kind: 'duck',
+            name: 'Bob'
+          }, (err, _res) => {
+            if (err) {
+              return done(err);
+            }
 
-          request(app)
-            .get('/pets/1')
-            .set('Authorization', 'Basic YWRtaW46bWVvd21peA==')
-            .expect('Content-Type', /json/)
-            .expect(200, {
-              age: 3,
-              kind: 'duck',
-              name: 'Bob'
-            }, done);
-        });
-    });
+            request(app)
+              .get('/pets/1')
+              .set('Authorization', 'Basic YWRtaW46bWVvd21peA==')
+              .expect('Content-Type', /json/)
+              .expect(200, {
+                age: 3,
+                kind: 'duck',
+                name: 'Bob'
+              }, done);
+          });
+      });
   });
 
   describe('DELETE method', () => {
